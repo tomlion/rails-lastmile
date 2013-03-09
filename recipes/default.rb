@@ -47,6 +47,8 @@ template "/etc/unicorn.cfg" do
   variables( :app_dir => app_dir)
 end
 
+rvm_ruby node['rails-lastmile']['ruby_version']
+
 rvm_shell "run-rails" do
   ruby_string node['rails-lastmile']['ruby_version']
   cwd app_dir
