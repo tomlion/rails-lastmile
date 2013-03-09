@@ -48,7 +48,7 @@ template "/etc/unicorn.cfg" do
 end
 
 rvm_shell "run-rails" do
-  rvm_ruby node['rails-lastmile']['ruby_version']
+  ruby_string node['rails-lastmile']['ruby_version']
   cwd app_dir
   if node['rails-lastmile']['reset_db']
     code <<-EOT1
