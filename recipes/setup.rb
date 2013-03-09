@@ -17,10 +17,10 @@ include_recipe "apt"
 package "build-essential"
 include_recipe "ruby_build"
 
-include_recipe "rbenv::system"
-include_recipe "rbenv::vagrant"
+include_recipe "rvm::system"
+include_recipe "rvm::vagrant"
 
-rbenv_global node['rails-lastmile']['ruby_version']
-rbenv_gem "bundler"
-rbenv_gem "rails"
+rvm_ruby node['rails-lastmile']['ruby_version']
+rvm_gem "bundler"
+#rvm_gem "rails"
 

@@ -12,10 +12,10 @@ class Chef::Recipe
 end
 
 app_dir = node['rails-lastmile']['app_dir']
-
+listen = node['rails-lastmile']['listen'] || "0.0.0.0:8080"
+worker_processes=node['rails-lastmile']['worker_processes'] || 2
 include_recipe "rails-lastmile::setup"
 
-include_recipe "nginx"
 include_recipe "unicorn"
 
 directory "/var/run/unicorn" do
@@ -47,8 +47,8 @@ template "/etc/unicorn.cfg" do
   variables( :app_dir => app_dir)
 end
 
-rbenv_script "run-rails" do
-  rbenv_version node['rails-lastmile']['ruby_version']
+rvm_shell "run-rails" do
+  rvm_ruby node['rails-lastmile']['ruby_version']
   cwd app_dir
   if node['rails-lastmile']['reset_db']
     code <<-EOT1
@@ -66,14 +66,5 @@ rbenv_script "run-rails" do
   end
 end
 
-template "/etc/nginx/sites-enabled/default" do
-  owner "root"
-  group "root"
-  mode "644"
-  source "nginx.erb"
-  variables( :static_root => "#{app_dir}/public")
-  notifies :restart, "service[nginx]"
-end
 
 service "unicorn"
-service "nginx"
