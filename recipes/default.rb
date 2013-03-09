@@ -12,8 +12,8 @@ class Chef::Recipe
 end
 
 app_dir = node['rails-lastmile']['app_dir']
-listen = node['rails-lastmile']['listen'] || "0.0.0.0:8080"
-worker_processes=node['rails-lastmile']['worker_processes'] || 2
+listen = node['rails-lastmile']['listen']
+worker_processes = node['rails-lastmile']['worker_processes']
 include_recipe "rails-lastmile::setup"
 
 include_recipe "unicorn"

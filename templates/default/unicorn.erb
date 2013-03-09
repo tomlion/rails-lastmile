@@ -4,5 +4,5 @@ stderr_path "/var/log/unicorn.log"
 stdout_path "/var/log/unicorn.log"
 
 listen "<%=@listen%>"
-worker_processes <%=@worker_processes%>
+worker_processes <%= @worker_processes %>
 timeout 30
