@@ -59,13 +59,13 @@ rvm_shell "run-rails" do
       bundle install
       bundle exec rake db:drop
       bundle exec rake db:setup
-      ps -p `cat /var/run/unicorn/master.pid` &>/dev/null || bundle exec unicorn -c /etc/unicorn.cfg -D --env #{node['rails-lastmile']['environment']}
+      ps -p `cat /var/run/unicorn/master.pid` &>/dev/null || bundle exec unicorn_rails -c /etc/unicorn.cfg -D --env #{node['rails-lastmile']['environment']}
     EOT1
   else
     code <<-EOT2
       bundle install
       bundle exec rake db:migrate
-      ps -p `cat /var/run/unicorn/master.pid` &>/dev/null || bundle exec unicorn -c /etc/unicorn.cfg -D --env #{node['rails-lastmile']['environment']}
+      ps -p `cat /var/run/unicorn/master.pid` &>/dev/null || bundle exec unicorn_rails -c /etc/unicorn.cfg -D --env #{node['rails-lastmile']['environment']}
     EOT2
   end
 end
