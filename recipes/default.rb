@@ -8,7 +8,7 @@
 #
 class Chef::Recipe
     # mix in recipe helpers
-    include Chef::RubyBuild::RecipeHelpers
+    #include Chef::RubyBuild::RecipeHelpers
 end
 
 app_dir = node['rails-lastmile']['app_dir']
